@@ -23,68 +23,58 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:weightSum="1">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Movie Name"
-            android:id="@+id/tvMovie" />
+            android:id="@+id/tvMovie"
+            android:paddingBottom="20dp"
+            android:paddingLeft="10dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Tag Line"
-            android:id="@+id/tvTagline" />
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Year"
-            android:id="@+id/tvYear" />
+            android:id="@+id/tvYear"
+            android:paddingLeft="15dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Duration"
-            android:id="@+id/tvDuration" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Director"
-            android:id="@+id/tvDirector" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Rate"
+                android:id="@+id/average"
+                android:layout_gravity="center_vertical"
+                android:paddingBottom="35dp"
+                android:paddingLeft="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="vote count"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/vote_count"
+                android:paddingBottom="35dp"
+                android:paddingLeft="15dp"/>
+        </LinearLayout>
+
+
     </LinearLayout>
 
    </LinearLayout>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/rbMovie"
-            android:layout_gravity="center"
-            android:stepSize=".5" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Cast"
-            android:id="@+id/tvCast" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Story"
-            android:id="@+id/tvStory" />
-    </LinearLayout>
 </LinearLayout>

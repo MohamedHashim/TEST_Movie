@@ -11,9 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -32,13 +31,14 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private TextView tvData;
-    private  ListView lvMovies;
+    private  GridView lvMovies;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-         lvMovies = (ListView) findViewById(R.id.lvMovies);
+         lvMovies = (GridView) findViewById(R.id.lvMovies);
+
 
         //   new JSONTask().execute("http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=5bf92cd209aa47161a39f6ab96f0e0fe&append_to_response=images&include_image_language=en,null");
 
@@ -80,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
                     moviemodel.setPopularity(finalObject.getDouble("popularity"));
                     moviemodel.setOverview(finalObject.getString("overview"));
                     moviemodel.setPosterPath(finalObject.getString("poster_path"));
+                    moviemodel.setVoteAverage(finalObject.getDouble("vote_average"));
+                    moviemodel.setVoteCount(finalObject.getInt("vote_count"));
+
                     // adding  the final object in the list
                     movieModelList.add(moviemodel);
                 }
@@ -132,41 +135,33 @@ public class MovieAdapter extends ArrayAdapter{
         }
         ImageView ivMovieIcon;
         TextView tvMovie;
-        TextView tvTagline;
         TextView tvYear;
-        TextView tvDuration;
-        TextView tvDirector;
-        RatingBar rbMovieRating;
-        TextView tvCast;
-        TextView tvStory;
+        TextView tvRate;
+        TextView vote_count;
 
-        ivMovieIcon= (ImageView) findViewById(R.id.ivIcon);
-        tvMovie= (TextView) findViewById(R.id.tvMovie);
-        tvTagline= (TextView) findViewById(R.id.tvTagline);
-        tvYear= (TextView) findViewById(R.id.tvYear);
-        tvDuration= (TextView) findViewById(R.id.tvDuration);
-        tvDirector= (TextView) findViewById(R.id.tvDirector);
-        rbMovieRating= (RatingBar) findViewById(R.id.rbMovie);
-        tvCast= (TextView) findViewById(R.id.tvCast);
-        tvStory= (TextView) findViewById(R.id.tvStory);
+      //  RatingBar rbMovieRating;
 
-      //  tvMovie.setText(movieModelList.get(position).getTitle());
-     //   tvTagline.setText(movieModelList.get(position).getTitle());
-       // tvYear.setText(movieModelList.get(position).getReleaseDate());
-     /* //  tvDuration.setText(movieModelList.get(position).getTitle());
-       // tvDirector.setText(movieModelList.get(position).getTitle());
 
-        rbMovieRating.setRating((float) (movieModelList.get(position).getPopularity()/.2));
+        ivMovieIcon= (ImageView) convertView.findViewById(R.id.ivIcon);
+        tvMovie= (TextView)convertView.findViewById(R.id.tvMovie);
+        tvYear= (TextView) convertView.findViewById(R.id.tvYear);
+        tvRate= (TextView) convertView.findViewById(R.id.average);
+        vote_count= (TextView) convertView.findViewById(R.id.vote_count);
+       // rbMovieRating= (RatingBar) convertView.findViewById(R.id.rbMovie);
 
-       // tvCast.setText(movieModelList.get(position).getTitle());
-        tvStory.setText(movieModelList.get(position).getOverview());
-*/
+      //  Picasso.with(getContext()).load(movieModelList.get(position).getPosterPath().toString().toString()).into(ivMovieIcon);
+
+        tvMovie.setText(movieModelList.get(position).getTitle());
+        tvYear.setText(movieModelList.get(position).getReleaseDate());
+        tvRate.setText(movieModelList.get(position).getVoteAverage().toString());
+        vote_count.setText(movieModelList.get(position).getVoteCount().toString());
+      //  rbMovieRating.setRating((float) (movieModelList.get(position).getPopularity() / 4));
+
         return convertView;
     }
 }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         return true;
@@ -175,7 +170,7 @@ public class MovieAdapter extends ArrayAdapter{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id =item.getItemId();
-        if(id==R.id.action_refresh){//TODO check the latest api link again
+        if(id==R.id.most_popular){//TODO check the latest api link again
             new JSONTask().execute("http://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=5bf92cd209aa47161a39f6ab96f0e0fe&append_to_response=images&include_image_language=en,null");
             return true;
         }
